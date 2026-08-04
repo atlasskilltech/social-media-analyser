@@ -9,10 +9,10 @@
   "subscribers": null,
   "videos": null,
   "likes": "2022",
-  "profileImage": "https://scontent.fbom71-1.fna.fbcdn.net/v/t39.30808-1/274541695_153031610424506_5725063494788358202_n.jpg?stp=dst-jpg_tt6&cstp=mx180x180&ctp=s180x180&_nc_cat=108&ccb=1-7&_nc_sid=3ab345&_nc_ohc=3HWR_lW_OT8Q7kNvwFjBGDy&_nc_oc=AdoUQWKA34g8Rk1OBsbL1dgLtoP8AJPX1q6tUWUlAaz8LCo2RTsTklzxxr7UG4vG004&_nc_zt=24&_nc_ht=scontent.fbom71-1.fna&_nc_gid=2cBxzxe-D-aZV7YA7BnfeQ&_nc_ss=7a289&oh=00_AQEWIdmvlwvYZ0sUioIWIlUg2UsPEZLW45soYkr5D9QsXA&oe=6A77B79E",
+  "profileImage": "https://scontent.fbom71-1.fna.fbcdn.net/v/t39.30808-1/274541695_153031610424506_5725063494788358202_n.jpg?stp=dst-jpg_tt6&cstp=mx180x180&ctp=s180x180&_nc_cat=108&ccb=1-7&_nc_sid=3ab345&_nc_ohc=3HWR_lW_OT8Q7kNvwFjBGDy&_nc_oc=AdoUQWKA34g8Rk1OBsbL1dgLtoP8AJPX1q6tUWUlAaz8LCo2RTsTklzxxr7UG4vG004&_nc_zt=24&_nc_ht=scontent.fbom71-1.fna&_nc_gid=2MdZdnFpHjHE5v3LXA-WRw&_nc_ss=7a289&oh=00_AQF1hidtkGetnL8wd0jfcSdV-Pd2JH73BFtpxLdRUX5wCA&oe=6A77B79E",
   "bio": "University",
   "profileUrl": "https://www.facebook.com/atlasskilltechuniversity/",
-  "lastUpdated": "2026-08-04T11:37:36.918Z",
-  "scrapeTime": 7657,
-  "strategy": "dom-selectors, meta-tags"
+  "lastUpdated": "2026-08-04T12:22:22.048Z",
+  "scrapeTime": 6468,
+  "strategy": "meta-tags"
 }

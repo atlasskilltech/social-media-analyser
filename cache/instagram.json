@@ -3,7 +3,7 @@
   "status": "success",
   "username": "atlasskilltechuniversity",
   "displayName": "ATLAS SkillTech University",
-  "followers": "38016",
+  "followers": "38000",
   "following": "27",
   "posts": "4571",
   "subscribers": null,
@@ -12,7 +12,7 @@
   "profileImage": "https://scontent.cdninstagram.com/v/t51.2885-19/337162932_640933524526936_6364519614048109395_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=111&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=DuqFEVORZZUQ7kNvwHE_UYS&_nc_oc=AdoPjNV31-P137QGdX1948hE5cf-ZkJ9zaXLutCsWcSf9XgkEd9PKL-BYuTvQMnUyXI&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_ss=7a689&oh=00_AQHwElUyvcqxrfsUDw3MUzd7dUXxEcRXyZVqZbC3B16U8g&oe=6A77BD3B",
   "bio": "A multidisciplinary university shaping tomorrow’s changemakers.\n@isdimumbai @atlas_isme @atlas_ugdx @atlas_schooloflaw @atlasskilltechonline",
   "profileUrl": "https://www.instagram.com/atlasskilltechuniversity/",
-  "lastUpdated": "2026-08-04T11:37:21.571Z",
-  "scrapeTime": 8173,
-  "strategy": "dom-selectors, meta-tags, embedded-json"
+  "lastUpdated": "2026-08-04T12:22:07.142Z",
+  "scrapeTime": 10510,
+  "strategy": "dom-selectors"
 }

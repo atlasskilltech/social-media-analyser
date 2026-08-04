@@ -70,3 +70,16 @@
 [2026-08-04T11:37:29.257Z] [YOUTUBE] [SUCCESS] via meta-tags, dom-selectors in 7675ms | meta-tags=ok dom-selectors=ok yt-initial-data=empty raw-html-fetch=empty
 [2026-08-04T11:37:36.923Z] [FACEBOOK] [SUCCESS] via dom-selectors, meta-tags in 7657ms | dom-selectors=ok meta-tags=ok raw-html-fetch=empty
 [2026-08-04T11:37:44.299Z] [LINKEDIN] [FAILURE] missing: displayName, followers | pageType=login-wall | raw-html-fetch=error
+[2026-08-04T11:45:45.444Z] [INSTAGRAM] [SUCCESS] via dom-selectors, meta-tags, embedded-json in 10684ms | dom-selectors=ok additional-data-loaded=empty shared-data=empty json-ld=empty meta-tags=ok embedded-json=ok raw-html-fetch=empty
+[2026-08-04T11:45:53.567Z] [YOUTUBE] [SUCCESS] via meta-tags, dom-selectors in 8113ms | meta-tags=ok dom-selectors=ok yt-initial-data=empty raw-html-fetch=empty
+[2026-08-04T11:46:00.429Z] [FACEBOOK] [SUCCESS] via dom-selectors, meta-tags in 6855ms | dom-selectors=ok meta-tags=ok raw-html-fetch=empty
+[2026-08-04T11:46:08.950Z] [LINKEDIN] [FAILURE] missing: displayName, followers | pageType=unreachable | raw-html-fetch=error
+[2026-08-04T12:05:07.555Z] [INSTAGRAM] [SUCCESS] via dom-selectors in 9752ms | dom-selectors=ok
+[2026-08-04T12:05:16.294Z] [YOUTUBE] [SUCCESS] via raw-html-fetch in 8728ms | dom-selectors=empty meta-tags=empty yt-initial-data=empty raw-html-fetch=ok
+[2026-08-04T12:05:22.996Z] [FACEBOOK] [SUCCESS] via meta-tags in 6692ms | dom-selectors=empty meta-tags=ok
+[2026-08-04T12:05:33.533Z] [LINKEDIN] [FAILURE] missing: displayName, followers | pageType=login-wall | raw-html-fetch=error
+[2026-08-04T12:06:57.256Z] [INSTAGRAM] [SUCCESS] via dom-selectors in 6909ms | dom-selectors=ok
+[2026-08-04T12:22:07.148Z] [INSTAGRAM] [SUCCESS] via dom-selectors in 10510ms | dom-selectors=ok
+[2026-08-04T12:22:15.574Z] [YOUTUBE] [SUCCESS] via raw-html-fetch in 8418ms | dom-selectors=empty meta-tags=empty yt-initial-data=empty raw-html-fetch=ok
+[2026-08-04T12:22:22.052Z] [FACEBOOK] [SUCCESS] via meta-tags in 6468ms | dom-selectors=empty meta-tags=ok
+[2026-08-04T12:22:27.803Z] [LINKEDIN] [FAILURE] missing: displayName, followers | pageType=unreachable | raw-html-fetch=error
