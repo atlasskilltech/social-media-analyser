@@ -22,9 +22,15 @@ const nextConfig = {
    *
    * Globbing the whole packages is the documented fix. Cost is ~80 MB of the
    * 250 MB function limit, which the measured sizes fit inside comfortably.
+   *
+   * The key is a glob matched against route paths, and matching is exact: an
+   * earlier version keyed only '/api/social/instagram/refresh', which fixed
+   * that route and left /api/diagnostics importing Playwright without
+   * browsers.json — the same crash on a different endpoint. Every route that
+   * can reach Playwright must be covered, hence all API routes.
    */
   outputFileTracingIncludes: {
-    '/api/social/instagram/refresh': [
+    '/api/**': [
       './node_modules/playwright-core/**',
       './node_modules/@sparticuz/chromium/**',
     ],
