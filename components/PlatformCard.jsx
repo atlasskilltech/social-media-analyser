@@ -114,7 +114,17 @@ export default function PlatformCard({ payload, loading, busy }) {
         </>
       )}
 
-      <footer className="mt-auto flex items-center justify-between gap-3 border-t border-line pt-3.5 pt-4">
+      {/*
+        A record whose last scrape did not succeed is still showing the previous
+        good values — say so, rather than letting stale numbers look live.
+      */}
+      {hasData && status !== 'success' && (
+        <p className="mt-3 rounded-lg bg-amber-50 px-2.5 py-1.5 text-center text-[11px] font-semibold text-amber-700 dark:bg-amber-950 dark:text-amber-300">
+          Showing Cached Data
+        </p>
+      )}
+
+      <footer className="mt-auto flex items-center justify-between gap-3 border-t border-line pt-3.5">
         <span className="text-xs text-ink-soft" title={hasData ? formatTimestamp(data.lastUpdated) : ''}>
           {hasData && data.lastUpdated ? `Updated ${timeAgo(data.lastUpdated)}` : 'Never updated'}
         </span>

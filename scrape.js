@@ -11,7 +11,7 @@
  * a platform is added.
  */
 
-const { ORDER, SPECS, isSupported } = require('./lib/platforms');
+const { ORDER, SPECS, isSupported, needsBrowser } = require('./lib/platforms');
 const { scrapeAndSave, printResult } = require('./lib/runner');
 const { launchBrowser } = require('./lib/browser');
 const { shutdownOcr } = require('./lib/ocr');
@@ -29,8 +29,12 @@ async function main() {
 
   const targets = requested.length ? requested : ORDER;
 
-  // One browser for the whole run; each platform still gets its own context.
-  const browser = await launchBrowser();
+  /*
+   * Launch a browser only if a target actually needs one. Instagram and
+   * Facebook use the Meta Graph API, so `scrape.js instagram facebook` starts
+   * no Chromium at all.
+   */
+  const browser = targets.some((name) => needsBrowser(name)) ? await launchBrowser() : null;
   const results = [];
 
   try {
@@ -40,7 +44,7 @@ async function main() {
       results.push(result);
     }
   } finally {
-    await browser.close().catch(() => {});
+    if (browser) await browser.close().catch(() => {});
     // The OCR worker holds a WASM runtime and would keep the process alive.
     await shutdownOcr();
   }

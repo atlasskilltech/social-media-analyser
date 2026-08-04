@@ -2,40 +2,48 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import PlatformCard from './PlatformCard';
-import RefreshProgress from './RefreshProgress';
+import RefreshModal from './RefreshModal';
 import Toast from './Toast';
 import { Spinner } from './icons';
 
-/** How often to poll while a refresh runs. */
-const POLL_INTERVAL_MS = 1500;
+/**
+ * How often to poll while a refresh runs.
+ *
+ * Faster than the old 1.5s: platforms run in parallel now and can finish within
+ * a couple of seconds of each other, so a slow poll would make several rows
+ * flip at once instead of progressing visibly.
+ */
+const POLL_INTERVAL_MS = 600;
 
 /**
  * Dashboard container.
  *
  * Owns data fetching and refresh state; cards stay presentational. One
- * "Refresh All" button starts a single job covering every platform, and the
- * progress readout updates as each finishes. A failed platform never clears
- * what is already on screen — the cache keeps the last good record.
+ * "Refresh All" button starts a single job covering every platform, and a modal
+ * reports live progress. A failed platform never clears what is already on
+ * screen — the cache keeps the last good record.
  */
 export default function Dashboard() {
   const [platforms, setPlatforms] = useState([]);
   const [refresh, setRefresh] = useState(null);
   const [loading, setLoading] = useState(true);
   const [starting, setStarting] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const [toast, setToast] = useState(null);
 
   const pollTimer = useRef(null);
   const dismissToast = useCallback(() => setToast(null), []);
+  const closeModal = useCallback(() => setModalOpen(false), []);
 
   const labels = Object.fromEntries(platforms.map((p) => [p.platform, p.label]));
 
   /*
    * The polling callback is created once, so reading `labels` from its closure
-   * captures the empty first render and toasts show raw ids ("linkedin"
-   * instead of "LinkedIn"). A ref always holds the current map.
+   * captures the empty first render. A ref always holds the current map.
    */
   const labelsRef = useRef(labels);
   labelsRef.current = labels;
+
   const running = Boolean(refresh?.running) || starting;
 
   /** Pull every platform's cached record. */
@@ -51,23 +59,6 @@ export default function Dashboard() {
     }
   }, []);
 
-  useEffect(() => {
-    load();
-    // Pick up a refresh that was already running when the page opened.
-    fetch('/api/refresh')
-      .then((r) => r.json())
-      .then((b) => {
-        if (b.success) {
-          setRefresh(b.refresh);
-          if (b.refresh.running) startPolling();
-        }
-      })
-      .catch(() => {});
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [load]);
-
-  useEffect(() => () => clearInterval(pollTimer.current), []);
-
   /** Poll until the job finishes, then reload every card at once. */
   const startPolling = useCallback(() => {
     clearInterval(pollTimer.current);
@@ -82,34 +73,53 @@ export default function Dashboard() {
 
         if (!body.refresh.running) {
           clearInterval(pollTimer.current);
+          // Refresh the cards behind the modal so they are current when it closes.
           await load();
 
           const entries = Object.entries(body.refresh.platforms || {});
-          const failed = entries.filter(([, i]) => i.state === 'failed');
+          const failed = entries.filter(([, i]) => i.state !== 'success');
 
-          setToast(
-            failed.length
-              ? {
-                  tone: 'warn',
-                  message: `Refreshed ${entries.length - failed.length} of ${entries.length}. Previous data kept for: ${failed
-                    .map(([name]) => labelsRef.current[name] || name)
-                    .join(', ')}.`,
-                }
-              : { tone: 'ok', message: 'All platforms updated.' }
-          );
+          if (failed.length) {
+            setToast({
+              tone: 'warn',
+              message: `Refreshed ${entries.length - failed.length} of ${entries.length}. Previous data kept for: ${failed
+                .map(([name]) => labelsRef.current[name] || name)
+                .join(', ')}.`,
+            });
+          }
         }
       } catch (err) {
         clearInterval(pollTimer.current);
         setToast({ tone: 'error', message: err.message });
       }
     }, POLL_INTERVAL_MS);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [load]);
 
-  /** Start a refresh of all four platforms. */
+  useEffect(() => {
+    load();
+    // Pick up a refresh that was already running when the page opened.
+    fetch('/api/refresh')
+      .then((r) => r.json())
+      .then((b) => {
+        if (b.success) {
+          setRefresh(b.refresh);
+          if (b.refresh.running) {
+            setModalOpen(true);
+            startPolling();
+          }
+        }
+      })
+      .catch(() => {});
+  }, [load, startPolling]);
+
+  useEffect(() => () => clearInterval(pollTimer.current), []);
+
+  /** Start a refresh of all platforms. */
   const handleRefreshAll = async () => {
     setStarting(true);
     setToast(null);
+    // Open immediately — the modal must appear on click, not after the round trip.
+    setModalOpen(true);
 
     try {
       const res = await fetch('/api/refresh', { method: 'POST' });
@@ -122,19 +132,18 @@ export default function Dashboard() {
       }
 
       // A cooldown or an already-running job is a guard, not a failure.
+      setModalOpen(res.status === 409);
+
       if (res.status === 429) {
-        setToast({
-          tone: 'warn',
-          message: body.message || 'Please wait before refreshing again.',
-        });
+        setToast({ tone: 'warn', message: body.message || 'Please wait before refreshing again.' });
       } else if (res.status === 409) {
-        setToast({ tone: 'info', message: body.message });
         setRefresh(body.refresh);
         startPolling();
       } else {
         setToast({ tone: 'error', message: body.error || 'Unable to start refresh.' });
       }
     } catch {
+      setModalOpen(false);
       setToast({ tone: 'error', message: 'Unable to start refresh.' });
     } finally {
       setStarting(false);
@@ -145,10 +154,10 @@ export default function Dashboard() {
   const blocked = running || cooldown > 0;
 
   return (
-    <main className="mx-auto max-w-6xl px-5 py-12">
+    <main className="mx-auto max-w-6xl px-4 py-10 sm:px-5 sm:py-12">
       <header className="mb-7 flex flex-wrap items-start justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">Social Media Dashboard</h1>
+        <div className="min-w-0">
+          <h1 className="text-xl font-bold tracking-tight sm:text-2xl">Social Media Dashboard</h1>
           <p className="mt-1 text-sm text-ink-soft">
             ATLAS SkillTech University — public profile data
           </p>
@@ -158,16 +167,12 @@ export default function Dashboard() {
           type="button"
           onClick={handleRefreshAll}
           disabled={blocked}
-          className="flex cursor-pointer items-center gap-2 rounded-lg bg-ink px-5 py-2.5 text-sm font-semibold text-canvas transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+          className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-ink px-5 py-2.5 text-sm font-semibold text-canvas transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
         >
           {running && <Spinner />}
           {running ? 'Refreshing…' : cooldown > 0 ? `Cooldown ${cooldown}s` : 'Refresh All'}
         </button>
       </header>
-
-      {refresh?.platforms && Object.keys(refresh.platforms).length > 0 && (
-        <RefreshProgress platforms={refresh.platforms} labels={labels} running={running} />
-      )}
 
       {toast && <Toast message={toast.message} tone={toast.tone} onDismiss={dismissToast} />}
 
@@ -193,6 +198,8 @@ export default function Dashboard() {
       <footer className="mt-9 text-center text-xs text-ink-soft">
         Next.js · Playwright — public data only, no login required
       </footer>
+
+      <RefreshModal open={modalOpen} refresh={refresh} labels={labels} onClose={closeModal} />
     </main>
   );
 }

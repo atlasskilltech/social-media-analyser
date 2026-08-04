@@ -83,3 +83,43 @@
 [2026-08-04T12:22:15.574Z] [YOUTUBE] [SUCCESS] via raw-html-fetch in 8418ms | dom-selectors=empty meta-tags=empty yt-initial-data=empty raw-html-fetch=ok
 [2026-08-04T12:22:22.052Z] [FACEBOOK] [SUCCESS] via meta-tags in 6468ms | dom-selectors=empty meta-tags=ok
 [2026-08-04T12:22:27.803Z] [LINKEDIN] [FAILURE] missing: displayName, followers | pageType=unreachable | raw-html-fetch=error
+[2026-08-04T12:30:22.160Z] [LINKEDIN] [FAILURE] missing: displayName, followers | pageType=unreachable | raw-html-fetch=error
+[2026-08-04T12:30:24.227Z] [FACEBOOK] [SUCCESS] via meta-tags in 8132ms | dom-selectors=empty meta-tags=ok
+[2026-08-04T12:30:24.658Z] [INSTAGRAM] [SUCCESS] via dom-selectors in 8569ms | dom-selectors=ok
+[2026-08-04T12:30:25.331Z] [YOUTUBE] [SUCCESS] via raw-html-fetch in 9243ms | dom-selectors=empty meta-tags=empty yt-initial-data=empty raw-html-fetch=ok
+[2026-08-04T12:32:24.180Z] [INSTAGRAM] [SUCCESS] via dom-selectors in 7998ms | dom-selectors=ok
+[2026-08-04T12:32:24.484Z] [FACEBOOK] [SUCCESS] via meta-tags in 8298ms | dom-selectors=empty meta-tags=ok
+[2026-08-04T12:32:25.416Z] [YOUTUBE] [SUCCESS] via raw-html-fetch in 9237ms | dom-selectors=empty meta-tags=empty yt-initial-data=empty raw-html-fetch=ok
+[2026-08-04T12:32:27.113Z] [LINKEDIN] [FAILURE] missing: displayName, followers | pageType=login-wall | raw-html-fetch=error
+[2026-08-04T12:33:41.279Z] [LINKEDIN] [FAILURE] missing: displayName, followers | pageType=unreachable | raw-html-fetch=error
+[2026-08-04T12:33:41.924Z] [FACEBOOK] [SUCCESS] via meta-tags in 6854ms | dom-selectors=empty meta-tags=ok
+[2026-08-04T12:33:43.111Z] [INSTAGRAM] [SUCCESS] via dom-selectors in 8045ms | dom-selectors=ok
+[2026-08-04T12:33:43.738Z] [YOUTUBE] [SUCCESS] via raw-html-fetch in 8668ms | dom-selectors=empty meta-tags=empty yt-initial-data=empty raw-html-fetch=ok
+[2026-08-04T12:35:05.657Z] [INSTAGRAM] [SUCCESS] via dom-selectors in 6874ms | dom-selectors=ok
+[2026-08-04T12:35:06.589Z] [FACEBOOK] [SUCCESS] via meta-tags in 7807ms | dom-selectors=empty meta-tags=ok
+[2026-08-04T12:35:08.499Z] [YOUTUBE] [SUCCESS] via raw-html-fetch in 9717ms | dom-selectors=empty meta-tags=empty yt-initial-data=empty raw-html-fetch=ok
+[2026-08-04T12:35:08.928Z] [LINKEDIN] [FAILURE] missing: displayName, followers | pageType=login-wall | raw-html-fetch=error
+[2026-08-04T12:52:11.303Z] [INSTAGRAM] [SUCCESS] via meta-graph-api in 438ms
+[2026-08-04T12:52:11.898Z] [FACEBOOK] [SUCCESS] via meta-graph-api in 588ms
+[2026-08-04T12:52:38.415Z] [INSTAGRAM] [SUCCESS] via meta-graph-api in 549ms
+[2026-08-04T12:52:38.789Z] [FACEBOOK] [SUCCESS] via meta-graph-api in 363ms
+[2026-08-04T12:53:00.266Z] [INSTAGRAM] [SUCCESS] via meta-graph-api in 586ms
+[2026-08-04T12:53:11.891Z] [YOUTUBE] [SUCCESS] via raw-html-fetch in 11620ms | dom-selectors=empty meta-tags=empty yt-initial-data=empty raw-html-fetch=ok
+[2026-08-04T12:53:12.453Z] [FACEBOOK] [SUCCESS] via meta-graph-api in 553ms
+[2026-08-04T12:53:18.637Z] [LINKEDIN] [FAILURE] missing: displayName, followers | pageType=unreachable | raw-html-fetch=error
+[2026-08-04T12:55:03.684Z] [FACEBOOK] [SUCCESS] via meta-graph-api in 393ms
+[2026-08-04T12:55:03.800Z] [INSTAGRAM] [SUCCESS] via meta-graph-api in 571ms
+[2026-08-04T12:55:09.131Z] [LINKEDIN] [FAILURE] missing: displayName, followers | pageType=unreachable | raw-html-fetch=error
+[2026-08-04T12:55:11.415Z] [YOUTUBE] [SUCCESS] via raw-html-fetch in 8126ms | dom-selectors=empty meta-tags=empty yt-initial-data=empty raw-html-fetch=ok
+[2026-08-04T12:57:21.510Z] [FACEBOOK] [SUCCESS] via meta-graph-api in 377ms
+[2026-08-04T12:57:22.135Z] [INSTAGRAM] [SUCCESS] via meta-graph-api in 1008ms
+[2026-08-04T12:57:29.511Z] [LINKEDIN] [FAILURE] missing: displayName, followers | pageType=login-wall | raw-html-fetch=error
+[2026-08-04T12:57:30.286Z] [YOUTUBE] [SUCCESS] via raw-html-fetch in 9157ms | dom-selectors=empty meta-tags=empty yt-initial-data=empty raw-html-fetch=ok
+[2026-08-04T12:58:25.860Z] [FACEBOOK] [SUCCESS] via meta-graph-api in 412ms
+[2026-08-04T12:58:25.918Z] [INSTAGRAM] [SUCCESS] via meta-graph-api in 473ms
+[2026-08-04T12:58:33.187Z] [YOUTUBE] [SUCCESS] via raw-html-fetch in 7737ms | dom-selectors=empty meta-tags=empty yt-initial-data=empty raw-html-fetch=ok
+[2026-08-04T12:58:35.517Z] [LINKEDIN] [FAILURE] missing: displayName, followers | pageType=login-wall | raw-html-fetch=error
+[2026-08-04T12:59:27.955Z] [INSTAGRAM] [SUCCESS] via meta-graph-api in 473ms
+[2026-08-04T12:59:28.466Z] [FACEBOOK] [SUCCESS] via meta-graph-api in 985ms
+[2026-08-04T12:59:35.663Z] [LINKEDIN] [FAILURE] missing: displayName, followers | pageType=unreachable | raw-html-fetch=error
+[2026-08-04T12:59:35.993Z] [YOUTUBE] [SUCCESS] via raw-html-fetch in 8511ms | dom-selectors=empty meta-tags=empty yt-initial-data=empty raw-html-fetch=ok

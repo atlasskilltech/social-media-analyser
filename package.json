@@ -7,11 +7,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "scrape": "node scrape.js",
-    "instagram": "node scrape.js instagram",
-    "youtube": "node scrape.js youtube",
-    "facebook": "node scrape.js facebook",
-    "linkedin": "node scrape.js linkedin"
+    "scrape": "node --env-file-if-exists=.env.local scrape.js",
+    "instagram": "node --env-file-if-exists=.env.local scrape.js instagram",
+    "youtube": "node --env-file-if-exists=.env.local scrape.js youtube",
+    "facebook": "node --env-file-if-exists=.env.local scrape.js facebook",
+    "linkedin": "node --env-file-if-exists=.env.local scrape.js linkedin"
   },
   "engines": {
     "node": ">=20.9.0"
