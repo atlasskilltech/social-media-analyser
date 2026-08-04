@@ -66,7 +66,15 @@ export default function Dashboard() {
           message: `Please wait ${body.retryAfter ?? 60}s before refreshing again.`,
         });
       } else {
-        setToast({ tone: 'error', message: 'Unable to refresh Instagram.' });
+        // Surface where it broke rather than a bare "something went wrong".
+        // The full structured payload goes to the console for debugging.
+        console.error('[refresh] failed', body);
+        setToast({
+          tone: 'error',
+          message: body.stage
+            ? `Unable to refresh Instagram — failed at "${body.stage}": ${body.error}`
+            : 'Unable to refresh Instagram.',
+        });
       }
 
       // Both paths return the last good data; keep showing it.

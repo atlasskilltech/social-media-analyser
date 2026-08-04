@@ -22,3 +22,16 @@
 [2026-08-04T09:21:20.675Z] [INSTAGRAM] [SUCCESS] strategies: dom=ok embedded-json=ok meta-tags=ok json-ld=empty
 [2026-08-04T09:22:50.359Z] [INSTAGRAM] [SUCCESS] strategies: dom=ok embedded-json=ok meta-tags=ok json-ld=empty
 [2026-08-04T09:24:12.465Z] [INSTAGRAM] [SUCCESS] strategies: dom=ok embedded-json=ok meta-tags=ok json-ld=empty
+[2026-08-04T09:33:15.628Z] [INSTAGRAM] [SUCCESS] strategies: dom=ok embedded-json=ok meta-tags=ok json-ld=empty
+[2026-08-04T09:39:11.963Z] [INSTAGRAM] [SUCCESS] strategies: dom=ok embedded-json=ok meta-tags=ok json-ld=empty
+[2026-08-04T09:40:14.948Z] [INSTAGRAM] [FAILURE] browserType.launch: Executable doesn't exist at C:\Users\Faizan\AppData\Local\Temp\claude\C--mern-social-media-analyserv2\0e7f2ab8-68c1-4c30-a842-9aa4c9a662f1\scratchpad\no-browsers \chromium_headless_shell-1234\chrome-headless-shell-win64\chrome-headless-shell.exe
+╔════════════════════════════════════════════════════════════╗
+║ Looks like Playwright was just installed or updated.       ║
+║ Please run the following command to download new browsers: ║
+║                                                            ║
+║     npx playwright install                                 ║
+║                                                            ║
+║ <3 Playwright Team                                         ║
+╚════════════════════════════════════════════════════════════╝
+[2026-08-04T09:46:56.694Z] [INSTAGRAM] [SUCCESS] strategies: dom=ok embedded-json=ok meta-tags=ok json-ld=empty
+[2026-08-04T09:48:14.133Z] [INSTAGRAM] [SUCCESS] strategies: dom=ok embedded-json=ok meta-tags=ok json-ld=empty
