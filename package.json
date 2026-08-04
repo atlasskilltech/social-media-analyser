@@ -7,10 +7,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "instagram": "node instagram.js",
-    "youtube": "node youtube.js",
-    "facebook": "node facebook.js",
-    "linkedin": "node linkedin.js"
+    "scrape": "node scrape.js",
+    "instagram": "node scrape.js instagram",
+    "youtube": "node scrape.js youtube",
+    "facebook": "node scrape.js facebook",
+    "linkedin": "node scrape.js linkedin"
   },
   "engines": {
     "node": ">=20.9.0"

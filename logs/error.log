@@ -42,3 +42,23 @@
 [2026-08-04T10:25:04.265Z] [INSTAGRAM] [SUCCESS] strategies: dom-selectors=ok additional-data-loaded=empty shared-data=empty json-ld=empty meta-tags=ok embedded-json=ok raw-html-fetch=empty
 [2026-08-04T10:28:02.332Z] [INSTAGRAM] [SUCCESS] strategies: dom-selectors=ok additional-data-loaded=empty shared-data=empty json-ld=empty meta-tags=ok embedded-json=ok raw-html-fetch=empty
 [2026-08-04T10:29:40.518Z] [INSTAGRAM] [SUCCESS] strategies: dom-selectors=ok additional-data-loaded=empty shared-data=empty json-ld=empty meta-tags=ok embedded-json=ok raw-html-fetch=empty
+[2026-08-04T10:51:23.135Z] [INSTAGRAM] [SUCCESS] via dom-selectors, meta-tags, embedded-json in 11215ms | dom-selectors=ok additional-data-loaded=empty shared-data=empty json-ld=empty meta-tags=ok embedded-json=ok raw-html-fetch=empty
+[2026-08-04T10:53:14.594Z] [INSTAGRAM] [SUCCESS] via dom-selectors, meta-tags, embedded-json in 12440ms | dom-selectors=ok additional-data-loaded=empty shared-data=empty json-ld=empty meta-tags=ok embedded-json=ok raw-html-fetch=empty
+[2026-08-04T10:53:27.958Z] [YOUTUBE] [SUCCESS] via dom-selectors, yt-initial-data, meta-tags in 13348ms | dom-selectors=ok yt-initial-data=ok meta-tags=ok raw-html-fetch=empty
+[2026-08-04T10:53:37.530Z] [FACEBOOK] [SUCCESS] via dom-selectors, meta-tags in 9558ms | dom-selectors=ok meta-tags=ok raw-html-fetch=empty
+[2026-08-04T10:53:47.059Z] [LINKEDIN] [FAILURE] missing: displayName, followers | pageType=unknown | dom-selectors=empty meta-tags=empty json-ld=empty raw-html-fetch=error
+[2026-08-04T10:54:33.231Z] [YOUTUBE] [SUCCESS] via meta-tags, dom-selectors in 10425ms | meta-tags=ok dom-selectors=ok yt-initial-data=empty raw-html-fetch=empty
+[2026-08-04T10:54:42.997Z] [LINKEDIN] [FAILURE] missing: displayName, followers | pageType=unknown | dom-selectors=empty meta-tags=empty json-ld=empty raw-html-fetch=error
+[2026-08-04T10:55:37.237Z] [LINKEDIN] [FAILURE] page returned HTTP 999
+[2026-08-04T10:56:17.520Z] [INSTAGRAM] [SUCCESS] via dom-selectors, meta-tags, embedded-json in 10545ms | dom-selectors=ok additional-data-loaded=empty shared-data=empty json-ld=empty meta-tags=ok embedded-json=ok raw-html-fetch=empty
+[2026-08-04T10:56:27.847Z] [YOUTUBE] [SUCCESS] via meta-tags, dom-selectors in 10320ms | meta-tags=ok dom-selectors=ok yt-initial-data=empty raw-html-fetch=empty
+[2026-08-04T10:56:37.315Z] [LINKEDIN] [FAILURE] page returned HTTP 999
+[2026-08-04T10:56:37.865Z] [FACEBOOK] [SUCCESS] via dom-selectors, meta-tags in 10007ms | dom-selectors=ok meta-tags=ok raw-html-fetch=empty
+[2026-08-04T10:58:40.667Z] [INSTAGRAM] [SUCCESS] via dom-selectors, meta-tags, embedded-json in 9752ms | dom-selectors=ok additional-data-loaded=empty shared-data=empty json-ld=empty meta-tags=ok embedded-json=ok raw-html-fetch=empty
+[2026-08-04T10:58:51.406Z] [YOUTUBE] [SUCCESS] via meta-tags, dom-selectors in 10731ms | meta-tags=ok dom-selectors=ok yt-initial-data=empty raw-html-fetch=empty
+[2026-08-04T10:59:00.718Z] [FACEBOOK] [SUCCESS] via dom-selectors, meta-tags in 9290ms | dom-selectors=ok meta-tags=ok raw-html-fetch=empty
+[2026-08-04T10:59:13.164Z] [LINKEDIN] [FAILURE] page returned HTTP 999
+[2026-08-04T11:00:42.799Z] [INSTAGRAM] [SUCCESS] via dom-selectors, meta-tags, embedded-json in 10659ms | dom-selectors=ok additional-data-loaded=empty shared-data=empty json-ld=empty meta-tags=ok embedded-json=ok raw-html-fetch=empty
+[2026-08-04T11:00:52.785Z] [YOUTUBE] [SUCCESS] via meta-tags, dom-selectors in 9975ms | meta-tags=ok dom-selectors=ok yt-initial-data=empty raw-html-fetch=empty
+[2026-08-04T11:01:02.653Z] [FACEBOOK] [SUCCESS] via dom-selectors, meta-tags in 9862ms | dom-selectors=ok meta-tags=ok raw-html-fetch=empty
+[2026-08-04T11:01:15.162Z] [LINKEDIN] [FAILURE] page returned HTTP 999
