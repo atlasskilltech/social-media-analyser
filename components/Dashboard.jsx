@@ -131,15 +131,12 @@ export default function Dashboard() {
         return;
       }
 
-      // A cooldown or an already-running job is a guard, not a failure.
-      setModalOpen(res.status === 409);
-
-      if (res.status === 429) {
-        setToast({ tone: 'warn', message: body.message || 'Please wait before refreshing again.' });
-      } else if (res.status === 409) {
+      // A refresh already in flight is not a failure — join it.
+      if (res.status === 409) {
         setRefresh(body.refresh);
         startPolling();
       } else {
+        setModalOpen(false);
         setToast({ tone: 'error', message: body.error || 'Unable to start refresh.' });
       }
     } catch {
@@ -150,8 +147,11 @@ export default function Dashboard() {
     }
   };
 
-  const cooldown = refresh?.cooldownRemaining ?? 0;
-  const blocked = running || cooldown > 0;
+  /*
+   * Only the in-flight state disables the button. There is no cooldown: with
+   * the Graph API every click may fetch fresh data.
+   */
+  const blocked = running;
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-10 sm:px-5 sm:py-12">
@@ -170,7 +170,7 @@ export default function Dashboard() {
           className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-ink px-5 py-2.5 text-sm font-semibold text-canvas transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
         >
           {running && <Spinner />}
-          {running ? 'Refreshing…' : cooldown > 0 ? `Cooldown ${cooldown}s` : 'Refresh All'}
+          {running ? 'Refreshing…' : 'Refresh All'}
         </button>
       </header>
 
@@ -178,7 +178,7 @@ export default function Dashboard() {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {loading
-          ? [0, 1, 2, 3].map((i) => (
+          ? [0, 1].map((i) => (
               <PlatformCard
                 key={i}
                 payload={{ platform: 'instagram', label: '', profileUrl: '#', data: null }}

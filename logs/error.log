@@ -123,3 +123,15 @@
 [2026-08-04T12:59:28.466Z] [FACEBOOK] [SUCCESS] via meta-graph-api in 985ms
 [2026-08-04T12:59:35.663Z] [LINKEDIN] [FAILURE] missing: displayName, followers | pageType=unreachable | raw-html-fetch=error
 [2026-08-04T12:59:35.993Z] [YOUTUBE] [SUCCESS] via raw-html-fetch in 8511ms | dom-selectors=empty meta-tags=empty yt-initial-data=empty raw-html-fetch=ok
+[2026-08-04T13:05:07.405Z] [INSTAGRAM] [SUCCESS] via meta-graph-api in 520ms
+[2026-08-04T13:05:07.405Z] [FACEBOOK] [SUCCESS] via meta-graph-api in 492ms
+[2026-08-04T13:05:07.990Z] [FACEBOOK] [SUCCESS] via meta-graph-api in 344ms
+[2026-08-04T13:05:08.089Z] [INSTAGRAM] [SUCCESS] via meta-graph-api in 443ms
+[2026-08-04T13:05:08.641Z] [FACEBOOK] [SUCCESS] via meta-graph-api in 344ms
+[2026-08-04T13:05:08.878Z] [INSTAGRAM] [SUCCESS] via meta-graph-api in 584ms
+[2026-08-04T13:05:36.449Z] [FACEBOOK] [SUCCESS] via meta-graph-api in 443ms
+[2026-08-04T13:05:36.828Z] [INSTAGRAM] [SUCCESS] via meta-graph-api in 823ms
+[2026-08-04T13:05:57.214Z] [INSTAGRAM] [FAILURE] Graph API rejected the request — unknown field or invalid id. (Unsupported get request. Object with ID '000000000000000' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https://developers.facebook.com/docs/graph-api)
+[2026-08-04T13:05:57.217Z] [FACEBOOK] [SUCCESS] via meta-graph-api in 284ms
+[2026-08-04T13:07:24.056Z] [FACEBOOK] [SUCCESS] via meta-graph-api in 353ms
+[2026-08-04T13:07:24.189Z] [INSTAGRAM] [SUCCESS] via meta-graph-api in 488ms

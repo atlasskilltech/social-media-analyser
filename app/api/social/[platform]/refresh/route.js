@@ -31,24 +31,9 @@ export async function POST(_request, { params }) {
 
     const { scrapeAndSave } = await import('@/lib/runner.js');
     const { readCache } = await import('@/lib/storage.js');
-    const { isActive, secondsRemaining, markRun } = await import('@/lib/cooldown.js');
     const { failure } = await import('@/lib/diagnostics.js');
 
-    stage = 'cooldown-check';
-    if (isActive()) {
-      return NextResponse.json(
-        {
-          success: false,
-          stage,
-          reason: 'cooldown',
-          retryAfter: secondsRemaining(),
-          data: await readCache(platform),
-        },
-        { status: 429 }
-      );
-    }
-    markRun();
-
+    // No cooldown: the Graph API path has no browser to protect.
     stage = 'scrape';
     const result = await scrapeAndSave(getSpec(platform));
 

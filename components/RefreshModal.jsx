@@ -16,8 +16,8 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 /** Per-state presentation. Every platform must land on one of the terminal four. */
 const STATE_UI = {
   pending: { icon: '⏳', label: 'Waiting', className: 'text-ink-soft' },
-  running: { icon: '⏳', label: 'Running…', className: 'text-ink-soft', pulse: true },
-  success: { icon: '✅', label: 'Success', className: 'text-emerald-600 dark:text-emerald-400' },
+  running: { icon: '⏳', label: 'Refreshing…', className: 'text-ink-soft', pulse: true },
+  success: { icon: '✅', label: 'Updated', className: 'text-emerald-600 dark:text-emerald-400' },
   failed: { icon: '❌', label: 'Failed', className: 'text-red-600 dark:text-red-400' },
   blocked: { icon: '⚠️', label: 'Blocked', className: 'text-amber-600 dark:text-amber-400' },
   timeout: { icon: '⏱️', label: 'Timeout', className: 'text-orange-600 dark:text-orange-400' },

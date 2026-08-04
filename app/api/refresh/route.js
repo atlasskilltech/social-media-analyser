@@ -12,7 +12,7 @@ export const maxDuration = 300;
  * ~60s four platforms take. The client polls the GET and renders per-platform
  * ticks as each finishes.
  *
- * 202 started · 429 cooldown · 409 already running
+ * 202 started · 409 already running. There is no cooldown.
  */
 export async function POST(request) {
   try {
@@ -36,16 +36,19 @@ export async function POST(request) {
       return NextResponse.json({ success: true, started: true, refresh: getState() }, { status: 202 });
     }
 
-    const state = getState();
-    const status = reason === 'cooldown' ? 429 : 409;
-    const message =
-      reason === 'cooldown'
-        ? `Cooldown active — try again in ${state.cooldownRemaining}s.`
-        : 'A refresh is already running.';
-
+    /*
+     * The only reason a start is refused is that one is already in flight.
+     * There is no cooldown — see lib/refresh.js.
+     */
     return NextResponse.json(
-      { success: false, started: false, reason, message, refresh: state },
-      { status }
+      {
+        success: false,
+        started: false,
+        reason,
+        message: 'A refresh is already running.',
+        refresh: getState(),
+      },
+      { status: 409 }
     );
   } catch (err) {
     return NextResponse.json(
