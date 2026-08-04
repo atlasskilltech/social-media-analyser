@@ -8,7 +8,27 @@ const nextConfig = {
    * it here keeps it as a plain runtime require in the server build — this is
    * what lets the existing scraper code run unchanged from a route handler.
    */
-  serverExternalPackages: ['playwright'],
+  serverExternalPackages: ['playwright', 'playwright-core', '@sparticuz/chromium'],
+
+  /*
+   * Force these packages into the serverless bundle wholesale.
+   *
+   * Next traces imports statically. playwright-core loads browsers.json at
+   * runtime via a computed path, so the tracer cannot see it and silently drops
+   * it — the deployed function then dies at import with
+   * "Cannot find module playwright-core/browsers.json" and returns a bare 500
+   * with no body. @sparticuz/chromium has the same problem: its Chromium is a
+   * brotli archive under bin/, referenced at runtime, never statically imported.
+   *
+   * Globbing the whole packages is the documented fix. Cost is ~80 MB of the
+   * 250 MB function limit, which the measured sizes fit inside comfortably.
+   */
+  outputFileTracingIncludes: {
+    '/api/social/instagram/refresh': [
+      './node_modules/playwright-core/**',
+      './node_modules/@sparticuz/chromium/**',
+    ],
+  },
 
   images: {
     /*
