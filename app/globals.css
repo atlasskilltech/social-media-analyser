@@ -1,0 +1,49 @@
+@import 'tailwindcss';
+
+/*
+ * Tailwind v4 is configured in CSS, not JavaScript — this @theme block is the
+ * whole design system. Each token becomes a real utility, so `--color-brand-ig`
+ * is usable as `text-brand-ig`, `bg-brand-ig`, `border-brand-ig`, and so on.
+ *
+ * This is the only stylesheet in the project.
+ */
+@theme {
+  /* Platform brand colours, carried over from the Vite build. */
+  --color-brand-ig: #e1306c;
+  --color-brand-yt: #ff0000;
+  --color-brand-fb: #1877f2;
+  --color-brand-li: #0a66c2;
+
+  /* Surface palette (light). Dark values are applied below. */
+  --color-surface: #ffffff;
+  --color-canvas: #f5f6f8;
+  --color-ink: #14161a;
+  --color-ink-soft: #5b6472;
+  --color-line: #e4e7ec;
+
+  --radius-card: 16px;
+
+  --shadow-card: 0 1px 2px rgb(16 24 40 / 0.05), 0 4px 12px rgb(16 24 40 / 0.05);
+}
+
+/*
+ * Dark mode follows the OS preference, matching the previous behaviour.
+ * Redefining the tokens means every utility that references them flips at
+ * once — no `dark:` variant needed on individual elements.
+ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-surface: #161b22;
+    --color-canvas: #0e1116;
+    --color-ink: #e6edf3;
+    --color-ink-soft: #8b949e;
+    --color-line: #262c36;
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.4), 0 4px 14px rgb(0 0 0 / 0.3);
+  }
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}

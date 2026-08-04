@@ -2,34 +2,31 @@
   "name": "social-media-analyserv2",
   "version": "1.0.0",
   "private": true,
-  "description": "Playwright scrapers for four fixed public social media pages. Writes cache/*.json for the PHP dashboard to display.",
-  "main": "server.js",
+  "description": "Next.js dashboard displaying public social media data scraped with Playwright.",
   "scripts": {
-    "dev": "concurrently -n api,web -c cyan,magenta \"npm:dev:api\" \"npm:dev:web\"",
-    "dev:api": "node server.js",
-    "dev:web": "vite",
-    "build": "vite build",
-    "start": "node server.js",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "instagram": "node instagram.js",
     "youtube": "node youtube.js",
     "facebook": "node facebook.js",
     "linkedin": "node linkedin.js"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20.9.0"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^5.2.1",
+    "next": "^16.3.0",
     "playwright": "^1.62.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^6.0.5",
-    "concurrently": "^10.0.4",
-    "vite": "^8.2.0"
+    "@tailwindcss/postcss": "^4.3.3",
+    "tailwindcss": "^4.3.3"
   }
 }
