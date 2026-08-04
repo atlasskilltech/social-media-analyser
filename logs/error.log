@@ -39,3 +39,6 @@
 [2026-08-04T09:56:51.336Z] [INSTAGRAM] [SUCCESS] strategies: dom=ok embedded-json=ok meta-tags=ok json-ld=empty
 [2026-08-04T10:11:47.092Z] [INSTAGRAM] [SUCCESS] strategies: dom=ok embedded-json=ok meta-tags=ok json-ld=empty
 [2026-08-04T10:17:28.213Z] [INSTAGRAM] [SUCCESS] strategies: dom=ok embedded-json=ok meta-tags=ok json-ld=empty
+[2026-08-04T10:25:04.265Z] [INSTAGRAM] [SUCCESS] strategies: dom-selectors=ok additional-data-loaded=empty shared-data=empty json-ld=empty meta-tags=ok embedded-json=ok raw-html-fetch=empty
+[2026-08-04T10:28:02.332Z] [INSTAGRAM] [SUCCESS] strategies: dom-selectors=ok additional-data-loaded=empty shared-data=empty json-ld=empty meta-tags=ok embedded-json=ok raw-html-fetch=empty
+[2026-08-04T10:29:40.518Z] [INSTAGRAM] [SUCCESS] strategies: dom-selectors=ok additional-data-loaded=empty shared-data=empty json-ld=empty meta-tags=ok embedded-json=ok raw-html-fetch=empty

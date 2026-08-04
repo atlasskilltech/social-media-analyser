@@ -95,10 +95,36 @@ export async function POST() {
     mark('scrape', result.ok ? 'ok' : `failed: ${result.error}`);
 
     if (!result.ok) {
-      stage = 'cache-write';
+      stage = 'extract';
+
+      /*
+       * Extraction failed. "no required field extracted" on its own is useless,
+       * so the response carries what the page actually was: its classification,
+       * title, URL, saved artifacts, an HTML preview, and the per-strategy
+       * outcome. That distinguishes stale selectors from a login wall, which
+       * need completely different fixes.
+       */
       return NextResponse.json(
         {
           ...failure(stage, result.error || 'Scrape produced no usable data.'),
+          page: result.forensics
+            ? {
+                detectedType: result.forensics.pageType,
+                url: result.forensics.url,
+                title: result.forensics.title,
+                htmlLength: result.forensics.htmlLength,
+                hasProfileData: result.forensics.hasProfileData,
+                htmlPath: result.forensics.htmlPath,
+                screenshotPath: result.forensics.screenshotPath,
+                htmlPreview: result.forensics.htmlPreview,
+                captureErrors: result.forensics.errors,
+              }
+            : null,
+          strategies: (result.report || []).map((r) => ({
+            strategy: r.name,
+            result: r.status === 'ok' ? 'success' : r.status === 'empty' ? 'failed' : 'error',
+            detail: r.detail,
+          })),
           data: await readCache('instagram'),
           log,
         },
@@ -115,6 +141,17 @@ export async function POST() {
       ok: true,
       stage: 'complete',
       durationMs: Date.now() - startedAt,
+      // Which strategies actually contributed — the answer to "how did this work
+      // today", which matters when Instagram changes its markup next week.
+      strategies: (result.report || []).map((r) => ({
+        strategy: r.name,
+        result: r.status === 'ok' ? 'success' : r.status === 'empty' ? 'failed' : 'error',
+        detail: r.detail,
+      })),
+      succeededVia: result.strategies || [],
+      page: result.forensics
+        ? { detectedType: result.forensics.pageType, title: result.forensics.title }
+        : null,
       data: result.data,
       log,
     });

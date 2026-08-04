@@ -12,6 +12,9 @@ dist/
 # runtime output — scraper writes these
 logs/
 
+# forensic artifacts (raw HTML + screenshot) written next to the cache
+cache/debug-*
+
 # env
 .env
 .env*.local
