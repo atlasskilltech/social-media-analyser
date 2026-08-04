@@ -32,13 +32,24 @@ module.exports = {
     extraHTTPHeaders: { 'Accept-Language': 'en-US,en;q=0.9' },
   },
 
-  /** Timeouts, in milliseconds. */
+  /**
+   * Timeouts, in milliseconds.
+   *
+   * Sized against a hard budget: four platforms must finish inside a serverless
+   * function's limit. The previous 60s navigation × 3 attempts meant a single
+   * unreachable site burned ~190s on its own — YouTube did exactly that on
+   * Vercel and the whole run blew past the timeout.
+   *
+   * Worst case now is 25s × 2 attempts + 1.5s backoff ≈ 52s for a dead site,
+   * and a site that bounces us to a login page fails in under a second because
+   * that is detected and not retried.
+   */
   timeouts: {
-    navigation: 60000, // hard cap on page.goto()
-    settle: 6000,      // grace period after load for client-side rendering
-    selector: 10000,   // per-selector wait inside strategies
+    navigation: 25000, // hard cap on page.goto()
+    settle: 3500,      // grace period after load for client-side rendering
+    selector: 8000,    // per-selector wait inside strategies
   },
 
-  /** How many times to retry a failed navigation before giving up. */
-  navigationRetries: 2,
+  /** Retries after the first attempt. Blocks are never retried. */
+  navigationRetries: 1,
 };
