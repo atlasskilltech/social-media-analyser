@@ -7,15 +7,6 @@ import Toast from './Toast';
 import { Spinner } from './icons';
 
 /**
- * How often to poll while a refresh runs.
- *
- * Faster than the old 1.5s: platforms run in parallel now and can finish within
- * a couple of seconds of each other, so a slow poll would make several rows
- * flip at once instead of progressing visibly.
- */
-const POLL_INTERVAL_MS = 600;
-
-/**
  * Dashboard container.
  *
  * Owns data fetching and refresh state; cards stay presentational. One
@@ -31,7 +22,6 @@ export default function Dashboard() {
   const [modalOpen, setModalOpen] = useState(false);
   const [toast, setToast] = useState(null);
 
-  const pollTimer = useRef(null);
   const dismissToast = useCallback(() => setToast(null), []);
   const closeModal = useCallback(() => setModalOpen(false), []);
 
@@ -46,10 +36,13 @@ export default function Dashboard() {
 
   const running = Boolean(refresh?.running) || starting;
 
-  /** Pull every platform's cached record. */
+  /**
+   * Pull every platform's cached record — used for the initial paint only.
+   * `cache: 'no-store'` so a browser or proxy cache can never satisfy this.
+   */
   const load = useCallback(async () => {
     try {
-      const res = await fetch('/api/social');
+      const res = await fetch('/api/social', { cache: 'no-store' });
       const body = await res.json();
       if (body.success) setPlatforms(body.platforms);
     } catch {
@@ -59,93 +52,85 @@ export default function Dashboard() {
     }
   }, []);
 
-  /** Poll until the job finishes, then reload every card at once. */
-  const startPolling = useCallback(() => {
-    clearInterval(pollTimer.current);
-
-    pollTimer.current = setInterval(async () => {
-      try {
-        const res = await fetch('/api/refresh');
-        const body = await res.json();
-        if (!body.success) return;
-
-        setRefresh(body.refresh);
-
-        if (!body.refresh.running) {
-          clearInterval(pollTimer.current);
-          // Refresh the cards behind the modal so they are current when it closes.
-          await load();
-
-          const entries = Object.entries(body.refresh.platforms || {});
-          const failed = entries.filter(([, i]) => i.state !== 'success');
-
-          if (failed.length) {
-            setToast({
-              tone: 'warn',
-              message: `Refreshed ${entries.length - failed.length} of ${entries.length}. Previous data kept for: ${failed
-                .map(([name]) => labelsRef.current[name] || name)
-                .join(', ')}.`,
-            });
-          }
-        }
-      } catch (err) {
-        clearInterval(pollTimer.current);
-        setToast({ tone: 'error', message: err.message });
-      }
-    }, POLL_INTERVAL_MS);
-  }, [load]);
-
   useEffect(() => {
     load();
-    // Pick up a refresh that was already running when the page opened.
-    fetch('/api/refresh')
-      .then((r) => r.json())
-      .then((b) => {
-        if (b.success) {
-          setRefresh(b.refresh);
-          if (b.refresh.running) {
-            setModalOpen(true);
-            startPolling();
-          }
-        }
-      })
-      .catch(() => {});
-  }, [load, startPolling]);
+  }, [load]);
 
-  useEffect(() => () => clearInterval(pollTimer.current), []);
-
-  /** Start a refresh of all platforms. */
+  /**
+   * Refresh every active platform.
+   *
+   * The fresh records come back in this response and are applied straight to
+   * state. Nothing is re-read from the cache afterwards — that round trip is
+   * exactly what showed stale data on serverless, where the read can be served
+   * by a different instance than the one that did the write.
+   */
   const handleRefreshAll = async () => {
     setStarting(true);
     setToast(null);
     // Open immediately — the modal must appear on click, not after the round trip.
     setModalOpen(true);
+    setRefresh({ running: true, startedAt: new Date().toISOString(), platforms: pendingProgress() });
 
     try {
-      const res = await fetch('/api/refresh', { method: 'POST' });
+      const res = await fetch('/api/refresh', {
+        method: 'POST',
+        cache: 'no-store',
+        headers: { 'Cache-Control': 'no-cache' },
+      });
       const body = await res.json();
 
-      if (res.status === 202) {
-        setRefresh(body.refresh);
-        startPolling();
+      if (!body.success) {
+        setModalOpen(false);
+        setToast({ tone: 'error', message: body.error || 'Unable to refresh.' });
         return;
       }
 
-      // A refresh already in flight is not a failure — join it.
-      if (res.status === 409) {
-        setRefresh(body.refresh);
-        startPolling();
+      // Drive the modal from the completed result.
+      setRefresh({
+        running: false,
+        startedAt: null,
+        finishedAt: new Date().toISOString(),
+        totalMs: body.totalMs,
+        platforms: body.platforms,
+      });
+
+      /*
+       * Apply the returned records directly. This is the fix for stale data:
+       * the UI renders what the API just returned rather than asking for it
+       * again and hoping the same instance answers.
+       */
+      setPlatforms((prev) =>
+        prev.map((p) => {
+          const fresh = body.platforms?.[p.platform];
+          return fresh?.data ? { ...p, data: fresh.data, hasData: true } : p;
+        })
+      );
+
+      const failed = Object.entries(body.platforms || {}).filter(([, i]) => i.state !== 'success');
+      if (failed.length) {
+        setToast({
+          tone: 'warn',
+          message: failed
+            .map(([name, i]) => `${labelsRef.current[name] || name}: ${i.error || 'failed'}`)
+            .join(' · '),
+        });
       } else {
-        setModalOpen(false);
-        setToast({ tone: 'error', message: body.error || 'Unable to start refresh.' });
+        setToast({ tone: 'ok', message: body.message });
       }
     } catch {
       setModalOpen(false);
-      setToast({ tone: 'error', message: 'Unable to start refresh.' });
+      setToast({ tone: 'error', message: 'Unable to refresh.' });
     } finally {
       setStarting(false);
     }
   };
+
+  /** Every active platform marked pending, for the modal's first paint. */
+  function pendingProgress() {
+    return Object.fromEntries(
+      platforms.map((p) => [p.platform, { state: 'running', ms: null, error: null }])
+    );
+  }
 
   /*
    * Only the in-flight state disables the button. There is no cooldown: with

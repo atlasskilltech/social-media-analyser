@@ -2,6 +2,15 @@ import { NextResponse } from 'next/server';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+export const fetchCache = 'force-no-store';
+
+/** Stop the CDN, any proxy and the browser from holding on to this response. */
+const NO_STORE = {
+  'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
+  Pragma: 'no-cache',
+  Expires: '0',
+};
 
 /**
  * GET /api/social
@@ -27,11 +36,14 @@ export async function GET() {
       })
     );
 
-    return NextResponse.json({ success: true, platforms, serverTime: new Date().toISOString() });
+    return NextResponse.json(
+      { success: true, platforms, serverTime: new Date().toISOString() },
+      { headers: NO_STORE }
+    );
   } catch (err) {
     return NextResponse.json(
       { success: false, error: err?.message || String(err) },
-      { status: 500 }
+      { status: 500, headers: NO_STORE }
     );
   }
 }

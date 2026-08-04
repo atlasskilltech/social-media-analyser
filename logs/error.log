@@ -135,3 +135,29 @@
 [2026-08-04T13:05:57.217Z] [FACEBOOK] [SUCCESS] via meta-graph-api in 284ms
 [2026-08-04T13:07:24.056Z] [FACEBOOK] [SUCCESS] via meta-graph-api in 353ms
 [2026-08-04T13:07:24.189Z] [INSTAGRAM] [SUCCESS] via meta-graph-api in 488ms
+[2026-08-04T13:17:06.783Z] [FACEBOOK] [SUCCESS] via meta-graph-api in 392ms
+[2026-08-04T13:17:06.828Z] [INSTAGRAM] [SUCCESS] via meta-graph-api in 439ms
+[2026-08-04T13:17:34.533Z] [FACEBOOK] [SUCCESS] via meta-graph-api in 405ms
+[2026-08-04T13:17:34.668Z] [INSTAGRAM] [SUCCESS] via meta-graph-api in 542ms
+[2026-08-04T13:22:19.905Z] [FACEBOOK] [SUCCESS] via meta-graph-api in 347ms (data changed)
+[2026-08-04T13:22:19.975Z] [INSTAGRAM] [SUCCESS] no change — cache left untouched (449ms)
+[2026-08-04T13:22:39.258Z] [INSTAGRAM] [SUCCESS] no change — cache left untouched (394ms)
+[2026-08-04T13:22:39.297Z] [FACEBOOK] [SUCCESS] via meta-graph-api in 425ms (data changed)
+[2026-08-04T13:22:39.745Z] [FACEBOOK] [SUCCESS] via meta-graph-api in 377ms (data changed)
+[2026-08-04T13:22:39.754Z] [INSTAGRAM] [SUCCESS] no change — cache left untouched (392ms)
+[2026-08-04T13:22:40.095Z] [FACEBOOK] [SUCCESS] via meta-graph-api in 317ms (data changed)
+[2026-08-04T13:22:40.153Z] [INSTAGRAM] [SUCCESS] no change — cache left untouched (379ms)
+[2026-08-04T13:24:09.314Z] [FACEBOOK] [SUCCESS] no change (401ms)
+[2026-08-04T13:24:09.401Z] [INSTAGRAM] [SUCCESS] via meta-graph-api in 521ms (data changed)
+[2026-08-04T13:24:09.849Z] [INSTAGRAM] [SUCCESS] no change (369ms)
+[2026-08-04T13:24:09.849Z] [FACEBOOK] [SUCCESS] no change (370ms)
+[2026-08-04T13:24:10.224Z] [FACEBOOK] [SUCCESS] no change (331ms)
+[2026-08-04T13:24:10.259Z] [INSTAGRAM] [SUCCESS] no change (371ms)
+[2026-08-04T13:24:35.466Z] [FACEBOOK] [SUCCESS] no change (355ms)
+[2026-08-04T13:24:35.536Z] [INSTAGRAM] [SUCCESS] via meta-graph-api in 425ms (data changed)
+[2026-08-04T13:24:39.418Z] [FACEBOOK] [SUCCESS] no change (307ms)
+[2026-08-04T13:24:39.479Z] [INSTAGRAM] [SUCCESS] no change (370ms)
+[2026-08-04T13:27:22.379Z] [FACEBOOK] [SUCCESS] no change (394ms)
+[2026-08-04T13:27:22.442Z] [INSTAGRAM] [SUCCESS] via meta-graph-api in 457ms (data changed)
+[2026-08-04T13:27:37.226Z] [FACEBOOK] [SUCCESS] no change (344ms)
+[2026-08-04T13:27:37.320Z] [INSTAGRAM] [SUCCESS] via meta-graph-api in 442ms (data changed)
